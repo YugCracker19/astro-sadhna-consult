@@ -197,49 +197,72 @@
 
 /* ===== 3D Earth (CSS only) ===== */
 .earth-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   perspective: 1200px;
-  width: 100%;
-  height: 100%;
+  pointer-events: none;
+}
+.earth-wrap {
+  position: relative;
+  width: 42%;
+  aspect-ratio: 1 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .earth {
-  position: relative;
-  width: 62%;
-  aspect-ratio: 1 / 1;
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  transform-style: preserve-3d;
-  transform: rotateX(18deg) rotateZ(-8deg);
+  transform: rotateX(15deg) rotateZ(-12deg);
   background:
-    radial-gradient(circle at 30% 30%, hsl(200 90% 70% / 0.95), transparent 55%),
-    radial-gradient(circle at 70% 70%, hsl(220 80% 30% / 0.9), transparent 60%),
-    linear-gradient(135deg, hsl(210 85% 45%), hsl(220 80% 25%));
+    /* specular highlight (sun glint) */
+    radial-gradient(circle at 28% 28%, hsl(200 100% 92% / 0.55), transparent 22%),
+    /* day-side ocean */
+    radial-gradient(circle at 35% 35%, hsl(205 95% 55%) 0%, hsl(215 90% 38%) 45%, hsl(225 85% 18%) 90%),
+    /* night terminator shading */
+    linear-gradient(120deg, transparent 45%, hsl(225 60% 8% / 0.55) 95%);
   box-shadow:
-    inset -22px -22px 60px rgba(0, 0, 0, 0.55),
-    inset 18px 18px 50px hsl(200 90% 75% / 0.35),
-    0 0 60px hsl(var(--primary) / 0.45),
-    0 0 120px hsl(var(--accent) / 0.35);
+    inset -18px -22px 55px rgba(0, 0, 0, 0.7),
+    inset 14px 16px 36px hsl(200 100% 85% / 0.35),
+    0 0 50px hsl(var(--primary) / 0.45),
+    0 0 110px hsl(var(--accent) / 0.3);
   overflow: hidden;
 }
-/* Continents layer — rotating texture using repeated radial gradients */
+/* Continents — realistic landmass silhouettes via layered radial gradients */
 .earth::before {
   content: '';
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background-image:
-    radial-gradient(ellipse 28% 18% at 22% 32%, hsl(120 45% 35%) 40%, transparent 60%),
-    radial-gradient(ellipse 18% 22% at 35% 58%, hsl(110 40% 30%) 40%, transparent 60%),
-    radial-gradient(ellipse 22% 14% at 60% 28%, hsl(95 40% 32%) 40%, transparent 60%),
-    radial-gradient(ellipse 16% 26% at 72% 62%, hsl(105 45% 28%) 40%, transparent 60%),
-    radial-gradient(ellipse 12% 14% at 50% 78%, hsl(100 40% 30%) 40%, transparent 60%),
-    radial-gradient(ellipse 24% 16% at 88% 40%, hsl(115 45% 33%) 40%, transparent 60%);
+    /* North America */
+    radial-gradient(ellipse 14% 22% at 18% 28%, hsl(95 35% 38%) 55%, transparent 70%),
+    radial-gradient(ellipse 8% 10% at 12% 42%, hsl(95 35% 38%) 55%, transparent 70%),
+    /* South America */
+    radial-gradient(ellipse 7% 18% at 24% 70%, hsl(100 40% 32%) 55%, transparent 70%),
+    /* Africa */
+    radial-gradient(ellipse 11% 22% at 48% 58%, hsl(50 45% 40%) 55%, transparent 70%),
+    radial-gradient(ellipse 8% 10% at 46% 38%, hsl(60 40% 42%) 55%, transparent 70%),
+    /* Europe */
+    radial-gradient(ellipse 9% 7% at 50% 26%, hsl(85 35% 38%) 55%, transparent 70%),
+    /* Asia */
+    radial-gradient(ellipse 22% 16% at 70% 30%, hsl(80 35% 36%) 55%, transparent 70%),
+    radial-gradient(ellipse 10% 8% at 78% 48%, hsl(70 40% 38%) 55%, transparent 70%),
+    /* Australia */
+    radial-gradient(ellipse 9% 7% at 82% 70%, hsl(35 50% 45%) 55%, transparent 70%),
+    /* Greenland / ice cap */
+    radial-gradient(ellipse 6% 5% at 32% 12%, hsl(200 30% 92%) 55%, transparent 70%),
+    /* Antarctica hint */
+    radial-gradient(ellipse 60% 8% at 50% 96%, hsl(200 30% 92%) 50%, transparent 75%);
   background-size: 200% 100%;
   background-repeat: repeat-x;
-  animation: earth-spin 28s linear infinite;
-  opacity: 0.95;
-  mix-blend-mode: overlay;
+  animation: earth-spin 32s linear infinite;
+  mix-blend-mode: normal;
+  opacity: 0.92;
 }
 /* Cloud layer */
 .earth::after {
@@ -248,24 +271,25 @@
   inset: 0;
   border-radius: 50%;
   background-image:
-    radial-gradient(ellipse 18% 8% at 18% 28%, rgba(255,255,255,0.7), transparent 60%),
-    radial-gradient(ellipse 22% 10% at 52% 48%, rgba(255,255,255,0.55), transparent 60%),
-    radial-gradient(ellipse 14% 7% at 78% 22%, rgba(255,255,255,0.6), transparent 60%),
-    radial-gradient(ellipse 20% 9% at 38% 72%, rgba(255,255,255,0.5), transparent 60%),
-    radial-gradient(ellipse 16% 8% at 82% 70%, rgba(255,255,255,0.55), transparent 60%);
+    radial-gradient(ellipse 14% 5% at 18% 26%, rgba(255,255,255,0.85), transparent 60%),
+    radial-gradient(ellipse 18% 6% at 52% 46%, rgba(255,255,255,0.7), transparent 65%),
+    radial-gradient(ellipse 12% 5% at 78% 22%, rgba(255,255,255,0.75), transparent 60%),
+    radial-gradient(ellipse 16% 6% at 38% 70%, rgba(255,255,255,0.65), transparent 65%),
+    radial-gradient(ellipse 14% 5% at 82% 68%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(ellipse 10% 4% at 8% 54%, rgba(255,255,255,0.6), transparent 60%);
   background-size: 200% 100%;
   background-repeat: repeat-x;
-  animation: earth-spin 18s linear infinite;
+  animation: earth-spin 22s linear infinite;
   opacity: 0.55;
-  filter: blur(2px);
+  filter: blur(1.5px);
 }
 /* Atmospheric halo */
 .earth-atmosphere {
   position: absolute;
-  inset: -8%;
+  inset: -10%;
   border-radius: 50%;
-  background: radial-gradient(circle, transparent 58%, hsl(200 90% 65% / 0.35) 64%, hsl(var(--primary) / 0.25) 72%, transparent 80%);
-  filter: blur(6px);
+  background: radial-gradient(circle, transparent 56%, hsl(200 95% 70% / 0.45) 62%, hsl(210 90% 60% / 0.18) 70%, transparent 80%);
+  filter: blur(4px);
   pointer-events: none;
   animation: glow-pulse 4s ease-in-out infinite;
 }
