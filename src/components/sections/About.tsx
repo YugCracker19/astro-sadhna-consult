@@ -1,12 +1,14 @@
 import { Sparkles, Users, Award } from "lucide-react";
-
-const STATS = [
-  { icon: Users, value: "50K+", label: "Happy Seekers" },
-  { icon: Award, value: "15+", label: "Years Experience" },
-  { icon: Sparkles, value: "98%", label: "Accuracy Rate" },
-];
+import { useLang } from "@/lib/i18n";
 
 const About = () => {
+  const { tr } = useLang();
+  const STATS = [
+    { icon: Users, value: "50K+", labelKey: "about.stat.seekers" as const },
+    { icon: Award, value: "15+", labelKey: "about.stat.experience" as const },
+    { icon: Sparkles, value: "98%", labelKey: "about.stat.accuracy" as const },
+  ];
+
   return (
     <section id="about" className="py-20 md:py-28 relative bg-gradient-to-b from-secondary/40 via-background to-background">
       <div className="container mx-auto">
@@ -18,7 +20,7 @@ const About = () => {
                 <div className="relative text-center px-8">
                   <div className="text-8xl mb-4" style={{ fontFamily: "serif" }}>ॐ</div>
                   <div className="font-display text-2xl text-gradient font-semibold">Sadhna</div>
-                  <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mt-2">Sacred Practice</div>
+                  <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mt-2">{tr("about.sacred")}</div>
                 </div>
               </div>
             </div>
@@ -27,25 +29,25 @@ const About = () => {
           </div>
 
           <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold mb-3">About Astro Sadhna</p>
+            <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold mb-3">{tr("about.eyebrow")}</p>
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
-              Where Ancient Wisdom Meets <span className="text-gradient">Modern Lives</span>
+              {tr("about.title.1")} <span className="text-gradient">{tr("about.title.highlight")}</span>
             </h2>
             <p className="text-muted-foreground mb-4 leading-relaxed">
-              Astro Sadhna is a sanctuary for those seeking honest, compassionate, and accurate astrological guidance. Founded on the timeless principles of Vedic Jyotish, we blend deep scriptural knowledge with practical, present-day insight.
+              {tr("about.p1")}
             </p>
             <p className="text-muted-foreground mb-8 leading-relaxed">
-              Every consultation is private, judgement-free, and tailored to your unique birth chart — because no two souls walk the same path. Our mission is simple: bring you clarity, peace, and direction.
+              {tr("about.p2")}
             </p>
 
             <div className="grid grid-cols-3 gap-4">
               {STATS.map((s) => {
                 const Icon = s.icon;
                 return (
-                  <div key={s.label} className="text-center p-4 rounded-2xl bg-card border border-border/60 shadow-sm">
+                  <div key={s.labelKey} className="text-center p-4 rounded-2xl bg-card border border-border/60 shadow-sm">
                     <Icon className="w-5 h-5 text-primary mx-auto mb-2" />
                     <div className="font-display text-2xl md:text-3xl font-bold text-gradient">{s.value}</div>
-                    <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{tr(s.labelKey)}</div>
                   </div>
                 );
               })}
