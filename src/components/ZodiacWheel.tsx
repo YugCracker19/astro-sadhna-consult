@@ -89,8 +89,8 @@ const ZodiacWheel = () => {
       </div>
 
       {/* 3D Rotating Earth at center */}
-      <div className="absolute inset-[24%] earth-scene">
-        <div className="relative w-full h-full flex items-center justify-center">
+      <div className="earth-scene">
+        <div className="earth-wrap">
           <div className="earth-atmosphere" />
           <div className="earth" />
         </div>
