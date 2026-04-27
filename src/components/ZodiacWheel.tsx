@@ -6,13 +6,10 @@ const ZODIAC_SIGNS = [
 const ZodiacWheel = () => {
   return (
     <div className="relative aspect-square w-full max-w-[520px] mx-auto">
-      {/* Outer cosmic glow */}
+      {/* Outer glow */}
       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 via-accent/20 to-transparent blur-3xl animate-glow-pulse" />
 
-      {/* Twinkling starfield backdrop */}
-      <div className="absolute inset-0 rounded-full starfield opacity-70" />
-
-      {/* Rotating outer zodiac ring */}
+      {/* Rotating outer ring with zodiac symbols */}
       <div className="absolute inset-0 animate-rotate-slow">
         <svg viewBox="0 0 400 400" className="w-full h-full">
           <defs>
@@ -22,7 +19,7 @@ const ZodiacWheel = () => {
               <stop offset="100%" stopColor="hsl(var(--primary-glow))" />
             </linearGradient>
           </defs>
-          <circle cx="200" cy="200" r="190" fill="none" stroke="url(#ringGrad)" strokeWidth="2" opacity="0.75" />
+          <circle cx="200" cy="200" r="190" fill="none" stroke="url(#ringGrad)" strokeWidth="2" opacity="0.7" />
           <circle cx="200" cy="200" r="170" fill="none" stroke="hsl(var(--accent))" strokeWidth="1" opacity="0.5" strokeDasharray="3 6" />
 
           {/* 12 spokes */}
@@ -45,7 +42,7 @@ const ZodiacWheel = () => {
             );
           })}
 
-          {/* Zodiac glyphs */}
+          {/* Zodiac glyphs around the ring */}
           {ZODIAC_SIGNS.map((sign, i) => {
             const angle = ((i * 30 - 90) * Math.PI) / 180;
             const x = 200 + Math.cos(angle) * 160;
@@ -68,19 +65,20 @@ const ZodiacWheel = () => {
         </svg>
       </div>
 
-      {/* Counter-rotating orbital ring */}
-      <div className="absolute inset-[16%] animate-rotate-reverse pointer-events-none">
+      {/* Counter-rotating inner ring */}
+      <div className="absolute inset-[18%] animate-rotate-reverse">
         <svg viewBox="0 0 200 200" className="w-full h-full">
-          <circle cx="100" cy="100" r="95" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" opacity="0.55" strokeDasharray="2 4" />
-          {/* Orbiting moons */}
+          <circle cx="100" cy="100" r="95" fill="none" stroke="hsl(var(--accent))" strokeWidth="1.5" opacity="0.6" strokeDasharray="2 4" />
+          <circle cx="100" cy="100" r="75" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" />
+          {/* Star of decoration */}
           {Array.from({ length: 8 }).map((_, i) => {
             const a = (i * 45 * Math.PI) / 180;
             return (
               <circle
                 key={i}
-                cx={100 + Math.cos(a) * 95}
-                cy={100 + Math.sin(a) * 95}
-                r="2.5"
+                cx={100 + Math.cos(a) * 85}
+                cy={100 + Math.sin(a) * 85}
+                r="2"
                 fill="hsl(var(--accent))"
               />
             );
@@ -88,11 +86,13 @@ const ZodiacWheel = () => {
         </svg>
       </div>
 
-      {/* 3D Rotating Earth at center */}
-      <div className="earth-scene">
-        <div className="earth-wrap">
-          <div className="earth-atmosphere" />
-          <div className="earth" />
+      {/* Center om / sun */}
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="relative">
+          <div className="absolute inset-0 rounded-full bg-primary/40 blur-2xl animate-glow-pulse" />
+          <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary-glow via-primary to-primary-deep flex items-center justify-center shadow-[0_0_50px_hsl(var(--primary)/0.6)]">
+            <span className="text-5xl text-white" style={{ fontFamily: "serif" }}>ॐ</span>
+          </div>
         </div>
       </div>
     </div>
