@@ -1,5 +1,6 @@
 import { Sparkles, Users, Award } from "lucide-react";
 import { useLang } from "@/lib/i18n";
+import guruji from "@/assets/guruji.png";
 
 const About = () => {
   const { tr } = useLang();
@@ -14,13 +15,17 @@ const About = () => {
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="relative">
-            <div className="aspect-[4/5] max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/15 via-accent/10 to-transparent p-1 relative overflow-hidden">
-              <div className="w-full h-full rounded-3xl bg-card flex items-center justify-center relative overflow-hidden">
-                <div className="absolute inset-0 starfield opacity-50" />
-                <div className="relative text-center px-8">
-                  <div className="text-8xl mb-4" style={{ fontFamily: "serif" }}>ॐ</div>
-                  <div className="font-display text-2xl text-gradient font-semibold">Sadhna</div>
-                  <div className="text-xs uppercase tracking-[0.3em] text-muted-foreground mt-2">{tr("about.sacred")}</div>
+            <div className="aspect-[4/5] max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/20 via-accent/15 to-transparent p-1 relative overflow-hidden shadow-[var(--shadow-glow)]">
+              <div className="w-full h-full rounded-3xl bg-card relative overflow-hidden">
+                <img
+                  src={guruji}
+                  alt="Guruji — Astro Sadhna ke pradhan jyotishi"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-5 text-center">
+                  <div className="font-display text-xl md:text-2xl font-semibold text-gradient">Guruji</div>
+                  <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-muted-foreground mt-1">{tr("about.sacred")}</div>
                 </div>
               </div>
             </div>
