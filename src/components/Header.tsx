@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Sparkles } from "lucide-react";
+import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 
