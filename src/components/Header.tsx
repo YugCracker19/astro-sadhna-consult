@@ -27,8 +27,8 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
         <a href="#top" className="flex items-center gap-2 group">
-          <span className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent shadow-[var(--shadow-glow)]">
-            <Sparkles className="w-5 h-5 text-white" />
+          <span className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-[var(--shadow-glow)]">
+            <img src={logo} alt="Astro Sadhna logo" className="w-full h-full object-cover" />
           </span>
           <div className="leading-tight">
             <div className="font-display text-xl md:text-2xl font-bold text-foreground">Astro Sadhna</div>
