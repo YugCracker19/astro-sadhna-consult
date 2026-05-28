@@ -1,9 +1,7 @@
 import { MessageCircle, Sparkles } from "lucide-react";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { useLang } from "@/lib/i18n";
 
 const CTA = () => {
-  const { tr } = useLang();
   return (
     <section className="py-20 md:py-28 relative overflow-hidden">
       <div className="container mx-auto">
@@ -14,13 +12,13 @@ const CTA = () => {
           <div className="relative max-w-3xl mx-auto">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-sm border border-white/25 text-white text-xs font-medium mb-6">
               <Sparkles className="w-3.5 h-3.5" />
-              {tr("cta.badge")}
+              Limited slots available today
             </div>
             <h2 className="font-display text-4xl md:text-6xl font-bold text-white mb-5 leading-tight">
-              {tr("cta.title")}
+              Don't Let Confusion Steal Another Day
             </h2>
             <p className="text-white/90 text-lg max-w-xl mx-auto mb-8">
-              {tr("cta.subtitle")}
+              Your answer is one message away. Connect with our trusted astrologers right now and step into clarity.
             </p>
             <a
               href={buildWhatsAppLink()}
@@ -29,9 +27,9 @@ const CTA = () => {
               className="inline-flex items-center gap-3 bg-white text-primary-deep font-bold px-8 py-4 rounded-full text-base shadow-2xl hover:scale-105 hover:shadow-[0_20px_60px_rgba(0,0,0,0.3)] transition-all duration-300"
             >
               <MessageCircle className="w-5 h-5" fill="currentColor" strokeWidth={0} />
-              {tr("cta.button")}
+              Consult Now on WhatsApp
             </a>
-            <p className="text-white/70 text-xs mt-5">{tr("cta.note")}</p>
+            <p className="text-white/70 text-xs mt-5">Confidential · 24/7 · Trusted by thousands</p>
           </div>
         </div>
       </div>

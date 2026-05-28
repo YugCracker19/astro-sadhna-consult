@@ -1,10 +1,8 @@
 import { ArrowRight, ShieldCheck, Star } from "lucide-react";
 import ZodiacWheel from "@/components/ZodiacWheel";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { useLang } from "@/lib/i18n";
 
 const Hero = () => {
-  const { tr } = useLang();
   return (
     <section id="top" className="relative pt-28 md:pt-32 pb-16 md:pb-24 overflow-hidden">
       {/* Background ornaments */}
@@ -18,17 +16,17 @@ const Hero = () => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-accent-soft border border-accent/30 text-accent-foreground text-xs md:text-sm font-medium mb-6 animate-fade-in">
               <Star className="w-3.5 h-3.5 fill-accent text-accent" />
-              {tr("hero.badge")}
+              Trusted by 50,000+ seekers worldwide
             </div>
 
             <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] mb-6 animate-fade-in-up">
-              {tr("hero.title.1")}{" "}
-              <span className="text-gradient">{tr("hero.title.highlight")}</span>{" "}
-              {tr("hero.title.2")}
+              Find Solutions to Your{" "}
+              <span className="text-gradient">Life Problems</span>{" "}
+              with Astro Sadhna
             </h1>
 
             <p className="text-base md:text-lg text-muted-foreground max-w-xl mx-auto lg:mx-0 mb-8 animate-fade-in-up" style={{ animationDelay: "0.15s" }}>
-              {tr("hero.subtitle")}
+              Get expert guidance for business, marriage, career, and personal life — rooted in ancient Vedic wisdom and delivered with modern clarity.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
@@ -38,21 +36,21 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 className="btn-glow text-primary-foreground font-semibold px-7 py-4 rounded-full inline-flex items-center gap-2 text-base"
               >
-                {tr("hero.cta.primary")}
+                Consult Now on WhatsApp
                 <ArrowRight className="w-5 h-5" />
               </a>
               <a
                 href="#services"
                 className="text-foreground/80 font-medium px-6 py-4 inline-flex items-center gap-2 hover:text-primary transition-colors"
               >
-                {tr("hero.cta.secondary")}
+                Explore Services
               </a>
             </div>
 
             <div className="mt-10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs md:text-sm text-muted-foreground animate-fade-in" style={{ animationDelay: "0.5s" }}>
-              <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-primary" /> {tr("hero.trust.confidential")}</div>
-              <div className="flex items-center gap-2"><Star className="w-4 h-4 fill-accent text-accent" /> {tr("hero.trust.rating")}</div>
-              <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> {tr("hero.trust.online")}</div>
+              <div className="flex items-center gap-2"><ShieldCheck className="w-4 h-4 text-primary" /> 100% Confidential</div>
+              <div className="flex items-center gap-2"><Star className="w-4 h-4 fill-accent text-accent" /> 4.9/5 Rating</div>
+              <div className="flex items-center gap-2"><span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" /> Astrologers online</div>
             </div>
           </div>
 
