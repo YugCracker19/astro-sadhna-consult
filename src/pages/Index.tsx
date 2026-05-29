@@ -7,6 +7,7 @@ import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import LeadPopup from "@/components/LeadPopup";
 
 const Index = () => {
   const jsonLd = {
@@ -36,6 +37,7 @@ const Index = () => {
       <CTA />
       <Footer />
       <WhatsAppFloat />
+      <LeadPopup />
     </main>
   );
 };
