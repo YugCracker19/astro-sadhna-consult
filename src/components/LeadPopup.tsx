@@ -45,8 +45,11 @@ const LeadPopup = () => {
       lang === "hi"
         ? `Namaste Guruji, mera naam ${result.data.name} hai. Mera phone number: ${result.data.phone}. Mujhe astrology guidance chahiye.`
         : `Namaste Guruji, my name is ${result.data.name}. My phone number: ${result.data.phone}. I would like astrology guidance.`;
-    window.open(buildWhatsAppLink(msg), "_blank", "noopener,noreferrer");
+    const link = buildWhatsAppLink(msg);
     close();
+    // Use location.href — popup blockers often block window.open() from form submit,
+    // especially on mobile. This guarantees navigation to WhatsApp.
+    window.location.href = link;
   };
 
   if (!open) return null;
