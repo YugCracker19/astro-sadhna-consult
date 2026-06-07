@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
+import { useCart } from "@/lib/cart";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
+  const { count, open } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -99,6 +101,20 @@ const Header = () => {
               HI
             </button>
           </div>
+
+          <button
+            onClick={open}
+            aria-label="Open cart"
+            className="relative w-10 h-10 inline-flex items-center justify-center rounded-full border border-border/70 text-foreground hover:text-primary hover:border-primary/40 transition-colors"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            {count > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-primary text-primary-foreground text-[10px] font-bold inline-flex items-center justify-center shadow-[var(--shadow-glow)]">
+                {count}
+              </span>
+            )}
+          </button>
+
 
           <a
             href={buildWhatsAppLink()}

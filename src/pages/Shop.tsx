@@ -1,19 +1,29 @@
 import { Link } from "react-router-dom";
-import { ShoppingBag, Sparkles, ArrowLeft, Gem, Flame, Star } from "lucide-react";
+import { ShoppingBag, ArrowLeft, Plus, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/sections/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import { buildWhatsAppLink } from "@/lib/whatsapp";
-import { useLang } from "@/lib/i18n";
 
-const PLACEHOLDER_CATEGORIES = [
-  { icon: Gem, en: "Gemstones & Rudraksha", hi: "Ratn & Rudraksha" },
-  { icon: Flame, en: "Yantras & Idols", hi: "Yantra & Murtiyaan" },
-  { icon: Star, en: "Spiritual Essentials", hi: "Aadhyatmik Saamagri" },
-];
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { useLang } from "@/lib/i18n";
+import { PRODUCTS, formatINR, useCart, Product } from "@/lib/cart";
 
 const Shop = () => {
   const { lang, tr } = useLang();
+  const { add, open, items } = useCart();
+  const { toast } = useToast();
+  const hi = lang === "hi";
+
+  const inCart = (id: string) => items.some((i) => i.product.id === id);
+
+  const handleAdd = (p: Product) => {
+    add(p);
+    toast({
+      title: hi ? "Cart mein add ho gaya" : "Added to cart",
+      description: hi ? p.nameHi : p.name,
+    });
+  };
 
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
@@ -38,46 +48,69 @@ const Shop = () => {
             <h1 className="font-display text-4xl md:text-6xl font-bold mb-4">
               {tr("shop.title.1")}{" "}
               <span className="text-gradient">{tr("shop.title.highlight")}</span>
-              <br />
-              <span className="text-gold">{tr("shop.title.2")}</span>
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
-              {tr("shop.subtitle")}
+              {hi
+                ? "Guruji dwara chuni hui abhimantrit vastuein — ghar par paayein, WhatsApp par order karein."
+                : "Hand-picked, energised products curated by Guruji — order easily over WhatsApp."}
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {PLACEHOLDER_CATEGORIES.map((c, i) => {
-              const Icon = c.icon;
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {PRODUCTS.map((p) => {
+              const added = inCart(p.id);
               return (
                 <div
-                  key={i}
-                  className="card-spiritual group flex flex-col items-center text-center"
+                  key={p.id}
+                  className="card-spiritual group flex flex-col"
                 >
-                  <div className="relative w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 transition-transform group-hover:scale-110">
-                    <Icon className="w-8 h-8 text-primary" />
+                  <div className="relative aspect-square rounded-xl bg-gradient-to-br from-primary/10 to-accent/15 flex items-center justify-center text-6xl mb-4 overflow-hidden">
+                    <span className="transition-transform duration-500 group-hover:scale-110">
+                      {p.emoji}
+                    </span>
+                    <span className="absolute top-3 left-3 text-[10px] uppercase tracking-wider bg-background/80 backdrop-blur-sm text-foreground/80 px-2 py-1 rounded-full border border-border/60">
+                      {p.category}
+                    </span>
                   </div>
-                  <h3 className="font-display text-2xl font-semibold mb-2">
-                    {lang === "hi" ? c.hi : c.en}
+                  <h3 className="font-display text-lg font-semibold leading-tight mb-1">
+                    {hi ? p.nameHi : p.name}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {lang === "hi" ? "Jald hi uplabdh" : "Coming soon"}
+                  <p className="text-xs text-muted-foreground mb-3 line-clamp-2 flex-1">
+                    {hi ? p.descriptionHi : p.description}
                   </p>
+                  <div className="flex items-center justify-between gap-2 mt-2">
+                    <span className="font-display text-xl font-bold text-primary">
+                      {formatINR(p.price)}
+                    </span>
+                    <Button
+                      size="sm"
+                      onClick={() => (added ? open() : handleAdd(p))}
+                      className="rounded-full font-semibold"
+                      variant={added ? "secondary" : "default"}
+                    >
+                      {added ? (
+                        <>
+                          <Check className="w-4 h-4 mr-1" />
+                          {hi ? "Dekhein" : "View"}
+                        </>
+                      ) : (
+                        <>
+                          <Plus className="w-4 h-4 mr-1" />
+                          {hi ? "Add" : "Add"}
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          <div className="mt-14 text-center">
-            <a
-              href={buildWhatsAppLink("Hello, please notify me when shop products are available")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-glow inline-flex items-center gap-2 text-primary-foreground text-sm md:text-base font-semibold px-7 py-3.5 rounded-full"
-            >
-              <Sparkles className="w-4 h-4" /> {tr("shop.notify")}
-            </a>
-          </div>
+          <p className="text-center text-xs text-muted-foreground mt-12">
+            {hi
+              ? "Sabhi products abhimantrit aur authentic hain. Shipping pure Bharat mein uplabdh."
+              : "All products are energised and authentic. Shipping available across India."}
+          </p>
         </div>
       </section>
 
