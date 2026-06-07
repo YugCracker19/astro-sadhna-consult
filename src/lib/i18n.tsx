@@ -10,7 +10,18 @@ export const t: Dict = {
   "nav.about": { en: "About", hi: "Hamare Baare Mein" },
   "nav.reviews": { en: "Reviews", hi: "Reviews" },
   "nav.why": { en: "Why Us", hi: "Kyun Hum" },
+  "nav.shop": { en: "Shop", hi: "Dukaan" },
   "nav.consult": { en: "Consult Now", hi: "Abhi Baat Karein" },
+  "shop.eyebrow": { en: "Our Shop", hi: "Hamari Dukaan" },
+  "shop.title.1": { en: "Sacred", hi: "Pavitra" },
+  "shop.title.highlight": { en: "Products", hi: "Vastuein" },
+  "shop.title.2": { en: "Coming Soon", hi: "Jald Aa Rahi Hain" },
+  "shop.subtitle": {
+    en: "Hand-picked rudraksha, gemstones, yantras, and spiritual essentials — curated by Guruji. Products launching soon.",
+    hi: "Guruji dwara chuni hui rudraksha, ratn, yantra, aur aadhyatmik saamagri — jald hi launch ho rahi hai.",
+  },
+  "shop.notify": { en: "Notify Me on WhatsApp", hi: "WhatsApp par Mujhe Bataayein" },
+  "shop.back": { en: "Back to Home", hi: "Mukhya Page par Jaayein" },
   "tagline": { en: "Spiritual Guidance", hi: "Aadhyatmik Margdarshan" },
 
   // Hero
