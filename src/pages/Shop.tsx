@@ -3,7 +3,7 @@ import { ShoppingBag, ArrowLeft, Plus, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/sections/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
-import CartDrawer from "@/components/CartDrawer";
+
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useLang } from "@/lib/i18n";
@@ -28,7 +28,6 @@ const Shop = () => {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden">
       <Header />
-      <CartDrawer />
 
       <section className="relative pt-32 md:pt-40 pb-20 md:pb-28">
         <div className="absolute inset-0 starfield opacity-30 pointer-events-none" />
