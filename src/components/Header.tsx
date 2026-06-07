@@ -102,6 +102,20 @@ const Header = () => {
             </button>
           </div>
 
+          <button
+            onClick={open}
+            aria-label="Open cart"
+            className="relative w-10 h-10 inline-flex items-center justify-center rounded-full border border-border/70 text-foreground hover:text-primary hover:border-primary/40 transition-colors"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            {count > 0 && (
+              <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-primary text-primary-foreground text-[10px] font-bold inline-flex items-center justify-center shadow-[var(--shadow-glow)]">
+                {count}
+              </span>
+            )}
+          </button>
+
+
           <a
             href={buildWhatsAppLink()}
             target="_blank"
