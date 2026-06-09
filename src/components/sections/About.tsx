@@ -5,7 +5,7 @@ import guruji from "@/assets/guruji.png";
 const About = () => {
   const { tr } = useLang();
   const STATS = [
-    { icon: Users, value: "50K+", labelKey: "about.stat.seekers" as const },
+    { icon: Users, value: "20K+", labelKey: "about.stat.seekers" as const },
     { icon: Award, value: "15+", labelKey: "about.stat.experience" as const },
     { icon: Sparkles, value: "98%", labelKey: "about.stat.accuracy" as const },
   ];
