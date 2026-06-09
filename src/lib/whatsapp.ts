@@ -1,7 +1,7 @@
 // Single source of truth for WhatsApp contact details.
 // Number must be digits only with country code (no +, spaces, or dashes).
-export const WHATSAPP_NUMBER = "919149192005"; // 91 (India) + 9149192005
-export const WHATSAPP_DISPLAY = "+91 91491 92005";
+export const WHATSAPP_NUMBER = "917247836664"; // 91 (India) + 7247836664
+export const WHATSAPP_DISPLAY = "+91 72478 36664";
 export const DEFAULT_MESSAGE = "Hello, I need guidance regarding my problem";
 
 // api.whatsapp.com/send is the most reliable cross-device endpoint —
