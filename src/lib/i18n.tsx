@@ -25,7 +25,7 @@ export const t: Dict = {
   "tagline": { en: "Spiritual Guidance", hi: "Aadhyatmik Margdarshan" },
 
   // Hero
-  "hero.badge": { en: "Trusted by 50,000+ seekers worldwide", hi: "50,000+ logon ka bharosa, duniya bhar mein" },
+  "hero.badge": { en: "Trusted by 1000+ seekers worldwide", hi: "1000+ logon ka bharosa, duniya bhar mein" },
   "hero.title.1": { en: "Find Solutions to Your", hi: "Apni" },
   "hero.title.highlight": { en: "Life Problems", hi: "Zindagi ki Problems" },
   "hero.title.2": { en: "with Astro Sadhna", hi: "ka Samadhan paayein Astro Sadhna ke saath" },
@@ -36,7 +36,7 @@ export const t: Dict = {
   "hero.cta.primary": { en: "Consult Now on WhatsApp", hi: "Abhi WhatsApp par Baat Karein" },
   "hero.cta.secondary": { en: "Explore Services", hi: "Sewayein Dekhein" },
   "hero.trust.confidential": { en: "100% Confidential", hi: "100% Gupt" },
-  "hero.trust.rating": { en: "4.9/5 Rating", hi: "4.9/5 Rating" },
+  "hero.trust.rating": { en: "4.6/5 Rating", hi: "4.6/5 Rating" },
   "hero.trust.online": { en: "Astrologers online", hi: "Jyotishi online hain" },
 
   // Services
