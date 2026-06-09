@@ -23,8 +23,12 @@ const Footer = () => {
               {tr("footer.about")}
             </p>
             <div className="flex gap-3">
-              {[Instagram, Facebook, Youtube].map((Icon, i) => (
-                <a key={i} href="#" aria-label="social" className="w-10 h-10 rounded-full border border-background/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors">
+              {[
+                { Icon: Instagram, href: "https://www.instagram.com/theastrosadhna/", label: "Instagram" },
+                { Icon: Facebook, href: "https://www.facebook.com/profile.php?id=61584943109805", label: "Facebook" },
+                { Icon: Youtube, href: "https://www.youtube.com/@ASTROSADHNALIVE", label: "YouTube" },
+              ].map(({ Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label} className="w-10 h-10 rounded-full border border-background/20 flex items-center justify-center hover:bg-primary hover:border-primary transition-colors">
                   <Icon className="w-4 h-4" />
                 </a>
               ))}
@@ -53,7 +57,7 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="w-4 h-4 mt-0.5 text-primary shrink-0" />
-                <a href="mailto:hello@astrosadhna.com" className="hover:text-primary transition-colors">hello@astrosadhna.com</a>
+                <a href="mailto:consultastrosadhna@gmail.com" className="hover:text-primary transition-colors">consultastrosadhna@gmail.com</a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary shrink-0" />
