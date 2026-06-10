@@ -55,10 +55,7 @@ const Services = () => {
                 rel="noopener noreferrer"
                 className="card-spiritual hover-tilt group flex flex-col relative overflow-hidden"
                 style={{ animationDelay: `${i * 0.1}s` }}
-                data-spotlight
               >
-
-
                 <span className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(400px circle at var(--mx,50%) var(--my,50%), hsl(var(--primary)/0.10), transparent 60%)" }} />
                 <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                   <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/10 transition-colors" />
