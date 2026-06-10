@@ -20,7 +20,8 @@ const Testimonials = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold mb-3">{tr("testimonials.eyebrow")}</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            {tr("testimonials.title.1")} <span className="text-gradient">{tr("testimonials.title.highlight")}</span>
+            {tr("testimonials.title.1")} <span className="animate-shimmer-text">{tr("testimonials.title.highlight")}</span>
+
           </h2>
           <p className="text-muted-foreground">
             {tr("testimonials.subtitle")}
@@ -37,6 +38,28 @@ const Testimonials = () => {
             <ReviewCard key={r.name} {...r} />
           ))}
         </div>
+
+        {/* Trust marquee strip */}
+        <div className="mt-16 relative mask-fade-x overflow-hidden">
+          <div className="flex gap-10 animate-marquee whitespace-nowrap w-max">
+            {[...REVIEWS, ...REVIEWS, ...REVIEWS].map((r, i) => (
+              <div key={i} className="flex items-center gap-3 text-sm">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white text-xs font-semibold">
+                  {r.name.charAt(0)}
+                </div>
+                <span className="font-semibold text-foreground">{r.name}</span>
+                <span className="text-muted-foreground">· {r.role}</span>
+                <span className="flex gap-0.5 ml-1">
+                  {Array.from({ length: 5 }).map((_, j) => (
+                    <Star key={j} className="w-3 h-3 fill-accent text-accent" />
+                  ))}
+                </span>
+                <span className="text-primary/40 mx-2">✦</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
     </section>
   );
