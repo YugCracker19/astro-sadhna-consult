@@ -1,7 +1,9 @@
 import { ArrowRight, ShieldCheck, Star } from "lucide-react";
 import ZodiacWheel from "@/components/ZodiacWheel";
+import Meteors from "@/components/Meteors";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
+
 
 const Hero = () => {
   const { tr } = useLang();
@@ -9,8 +11,10 @@ const Hero = () => {
     <section id="top" className="relative pt-28 md:pt-32 pb-16 md:pb-24 overflow-hidden">
       {/* Background ornaments */}
       <div className="absolute inset-0 starfield opacity-60 pointer-events-none" />
-      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px]" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-accent/15 rounded-full blur-[140px]" />
+      <Meteors number={12} />
+      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/15 rounded-full blur-[140px] animate-glow-pulse" />
+      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-accent/15 rounded-full blur-[140px] animate-glow-pulse" />
+
 
       <div className="container mx-auto relative">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
