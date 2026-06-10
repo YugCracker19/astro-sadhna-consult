@@ -8,6 +8,9 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import LeadPopup from "@/components/LeadPopup";
+import CursorGlow from "@/components/CursorGlow";
+import FloatingSymbols from "@/components/FloatingSymbols";
+
 
 const Index = () => {
   const jsonLd = {
@@ -26,9 +29,12 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background overflow-x-hidden">
+    <main className="min-h-screen bg-background overflow-x-hidden relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <FloatingSymbols count={16} />
+      <CursorGlow />
       <Header />
+
       <Hero />
       <Services />
       <About />
