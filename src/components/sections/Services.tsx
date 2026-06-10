@@ -37,7 +37,7 @@ const Services = () => {
         <div className="text-center max-w-2xl mx-auto mb-14">
           <p className="text-sm uppercase tracking-[0.25em] text-primary font-semibold mb-3">{tr("services.eyebrow")}</p>
           <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            {tr("services.title.1")} <span className="text-gradient">{tr("services.title.highlight")}</span> {tr("services.title.2")}
+            {tr("services.title.1")} <span className="animate-shimmer-text">{tr("services.title.highlight")}</span> {tr("services.title.2")}
           </h2>
           <p className="text-muted-foreground">
             {tr("services.subtitle")}
@@ -53,13 +53,15 @@ const Services = () => {
                 href={buildWhatsAppLink(s.msg)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-spiritual group flex flex-col"
+                className="card-spiritual hover-tilt group flex flex-col relative overflow-hidden"
                 style={{ animationDelay: `${i * 0.1}s` }}
               >
-                <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 transition-transform group-hover:scale-110 group-hover:rotate-3">
+                <span className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "radial-gradient(400px circle at var(--mx,50%) var(--my,50%), hsl(var(--primary)/0.10), transparent 60%)" }} />
+                <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary/15 to-accent/15 flex items-center justify-center mb-5 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">
                   <div className="absolute inset-0 rounded-xl bg-primary/0 group-hover:bg-primary/10 transition-colors" />
                   <Icon className="w-7 h-7 text-primary relative" />
                 </div>
+
                 <h3 className="font-display text-2xl font-semibold mb-2 text-foreground">{tr(s.titleKey)}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1">{tr(s.descKey)}</p>
                 <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary opacity-80 group-hover:opacity-100 group-hover:gap-2.5 transition-all">
