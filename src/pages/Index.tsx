@@ -29,9 +29,12 @@ const Index = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background overflow-x-hidden">
+    <main className="min-h-screen bg-background overflow-x-hidden relative">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      <FloatingSymbols count={16} />
+      <CursorGlow />
       <Header />
+
       <Hero />
       <Services />
       <About />
