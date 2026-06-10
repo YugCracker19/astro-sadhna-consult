@@ -8,6 +8,9 @@ import CTA from "@/components/sections/CTA";
 import Footer from "@/components/sections/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import LeadPopup from "@/components/LeadPopup";
+import CursorGlow from "@/components/CursorGlow";
+import FloatingSymbols from "@/components/FloatingSymbols";
+
 
 const Index = () => {
   const jsonLd = {
