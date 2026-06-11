@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { useTheme } from "@/lib/theme";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
   const { count, open } = useCart();
+  const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -114,6 +116,18 @@ const Header = () => {
               </span>
             )}
           </button>
+
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            title={theme === "dark" ? "Switch to day mode" : "Switch to night mode"}
+            className="relative w-10 h-10 inline-flex items-center justify-center rounded-full border border-border/70 text-foreground hover:text-primary hover:border-primary/40 transition-all overflow-hidden"
+          >
+            <Sun className={`w-5 h-5 absolute transition-all duration-500 ${theme === "dark" ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"}`} />
+            <Moon className={`w-5 h-5 absolute transition-all duration-500 ${theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"}`} />
+          </button>
+
+
 
 
           <a
