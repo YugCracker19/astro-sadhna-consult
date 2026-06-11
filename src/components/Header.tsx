@@ -10,6 +10,7 @@ import { useTheme } from "@/lib/theme";
 const Header = () => {
   const { lang, setLang, tr } = useLang();
   const { count, open } = useCart();
+  const { theme, toggle } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
