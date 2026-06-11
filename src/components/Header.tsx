@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon, LogOut, User } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useTheme } from "@/lib/theme";
+import { useProfile } from "@/lib/profile";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
   const { count, open } = useCart();
   const { theme, toggle } = useTheme();
+  const { profile, clearProfile } = useProfile();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
