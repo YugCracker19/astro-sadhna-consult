@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag, ShoppingCart } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
+import { useTheme } from "@/lib/theme";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
