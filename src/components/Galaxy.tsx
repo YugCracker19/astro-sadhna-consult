@@ -19,7 +19,7 @@ const Galaxy = ({ count = 80 }: { count?: number }) => {
   if (theme !== "dark") return null;
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div className="pointer-events-none fixed inset-0 z-[60] overflow-hidden mix-blend-screen">
       {/* nebula glows */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full bg-primary/10 blur-3xl animate-glow-pulse" />
       <div className="absolute top-1/3 -right-40 w-[600px] h-[600px] rounded-full bg-accent/10 blur-3xl animate-glow-pulse" style={{ animationDelay: "1.5s" }} />
