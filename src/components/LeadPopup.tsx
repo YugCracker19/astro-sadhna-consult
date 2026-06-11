@@ -3,8 +3,10 @@ import { X, Sparkles, MessageCircle } from "lucide-react";
 import { z } from "zod";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
+import { useProfile } from "@/lib/profile";
+import { toast } from "@/hooks/use-toast";
 
-const STORAGE_KEY = "astro-lead-popup-shown";
+const SESSION_KEY = "astro-lead-popup-shown";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(60, "Name too long"),
@@ -18,19 +20,34 @@ const schema = z.object({
 
 const LeadPopup = () => {
   const { lang, tr } = useLang();
+  const { profile, saveProfile } = useProfile();
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    // Returning user — skip popup, greet once per session
+    if (profile) {
+      if (!sessionStorage.getItem("astro-welcome-back-shown")) {
+        sessionStorage.setItem("astro-welcome-back-shown", "1");
+        toast({
+          title: lang === "hi" ? `Wapas swagat hai, ${profile.name}!` : `Welcome back, ${profile.name}!`,
+          description:
+            lang === "hi"
+              ? "Aapka profile yaad rakha gaya hai."
+              : "Your profile is remembered on this device.",
+        });
+      }
+      return;
+    }
+    if (sessionStorage.getItem(SESSION_KEY)) return;
     const id = setTimeout(() => setOpen(true), 5000);
     return () => clearTimeout(id);
-  }, []);
+  }, [profile, lang]);
 
   const close = () => {
-    sessionStorage.setItem(STORAGE_KEY, "1");
+    sessionStorage.setItem(SESSION_KEY, "1");
     setOpen(false);
   };
 
@@ -41,6 +58,8 @@ const LeadPopup = () => {
       setError(result.error.issues[0]?.message ?? "Invalid input");
       return;
     }
+    // Persist profile so the user is recognized on return visits
+    saveProfile({ name: result.data.name, phone: result.data.phone });
     const msg =
       lang === "hi"
         ? `Namaste Guruji, mera naam ${result.data.name} hai. Mera phone number: ${result.data.phone}. Mujhe astrology guidance chahiye.`
