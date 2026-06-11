@@ -117,6 +117,18 @@ const Header = () => {
             )}
           </button>
 
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            title={theme === "dark" ? "Switch to day mode" : "Switch to night mode"}
+            className="relative w-10 h-10 inline-flex items-center justify-center rounded-full border border-border/70 text-foreground hover:text-primary hover:border-primary/40 transition-all overflow-hidden"
+          >
+            <Sun className={`w-5 h-5 absolute transition-all duration-500 ${theme === "dark" ? "opacity-0 rotate-90 scale-0" : "opacity-100 rotate-0 scale-100"}`} />
+            <Moon className={`w-5 h-5 absolute transition-all duration-500 ${theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"}`} />
+          </button>
+
+
+
 
           <a
             href={buildWhatsAppLink()}
