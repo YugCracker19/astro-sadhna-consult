@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon, LogOut, User } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useTheme } from "@/lib/theme";
+import { useProfile } from "@/lib/profile";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
   const { count, open } = useCart();
   const { theme, toggle } = useTheme();
+  const { profile, clearProfile } = useProfile();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -127,8 +129,20 @@ const Header = () => {
             <Moon className={`w-5 h-5 absolute transition-all duration-500 ${theme === "dark" ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-0"}`} />
           </button>
 
-
-
+          {profile && (
+            <div className="hidden md:inline-flex items-center gap-1.5 pl-2 pr-1 py-1 rounded-full border border-primary/30 bg-primary/5 text-xs font-semibold text-foreground">
+              <User className="w-3.5 h-3.5 text-primary" />
+              <span className="max-w-[90px] truncate">{profile.name.split(" ")[0]}</span>
+              <button
+                onClick={clearProfile}
+                title="Log out"
+                aria-label="Log out"
+                className="ml-1 w-6 h-6 inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
 
           <a
             href={buildWhatsAppLink()}
