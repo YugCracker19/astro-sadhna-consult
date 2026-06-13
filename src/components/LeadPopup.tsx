@@ -5,6 +5,7 @@ import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useProfile } from "@/lib/profile";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const SESSION_KEY = "astro-lead-popup-shown";
 
@@ -51,7 +52,7 @@ const LeadPopup = () => {
     setOpen(false);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const result = schema.safeParse({ name, phone });
     if (!result.success) {
@@ -60,14 +61,17 @@ const LeadPopup = () => {
     }
     // Persist profile so the user is recognized on return visits
     saveProfile({ name: result.data.name, phone: result.data.phone });
+    // Save lead to admin database (fire and forget — don't block WhatsApp redirect)
+    supabase
+      .from("leads")
+      .insert({ name: result.data.name, phone: result.data.phone, lang, source: "popup" })
+      .then(({ error }) => { if (error) console.warn("lead save failed", error.message); });
     const msg =
       lang === "hi"
         ? `Namaste Guruji, mera naam ${result.data.name} hai. Mera phone number: ${result.data.phone}. Mujhe astrology guidance chahiye.`
         : `Namaste Guruji, my name is ${result.data.name}. My phone number: ${result.data.phone}. I would like astrology guidance.`;
     const link = buildWhatsAppLink(msg);
     close();
-    // Use location.href — popup blockers often block window.open() from form submit,
-    // especially on mobile. This guarantees navigation to WhatsApp.
     window.location.href = link;
   };
 

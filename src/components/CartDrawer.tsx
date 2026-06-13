@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useCart, formatINR } from "@/lib/cart";
 import { useLang } from "@/lib/i18n";
 import { WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import { supabase } from "@/integrations/supabase/client";
 
 const checkoutSchema = z.object({
   name: z.string().trim().min(2, "Name too short").max(60),
@@ -41,6 +42,19 @@ const CartDrawer = () => {
       return;
     }
     if (items.length === 0) return;
+
+    // Save order to admin database (fire and forget)
+    supabase
+      .from("orders")
+      .insert({
+        customer_name: parsed.data.name,
+        phone: parsed.data.phone,
+        address: parsed.data.address,
+        notes: parsed.data.notes || null,
+        items: items.map((i) => ({ id: i.product.id, name: i.product.name, price: i.product.price, qty: i.qty })),
+        total,
+      })
+      .then(({ error }) => { if (error) console.warn("order save failed", error.message); });
 
     const lines = [
       "*🛕 New Order — Astro Sadhna*",
