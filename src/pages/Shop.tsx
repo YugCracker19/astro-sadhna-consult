@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ShoppingBag, ArrowLeft, Plus, Check } from "lucide-react";
 import Header from "@/components/Header";
@@ -8,12 +9,18 @@ import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { useLang } from "@/lib/i18n";
 import { PRODUCTS, formatINR, useCart, Product } from "@/lib/cart";
+import { fetchProducts } from "@/lib/products";
 
 const Shop = () => {
   const { lang, tr } = useLang();
   const { add, open, items } = useCart();
   const { toast } = useToast();
   const hi = lang === "hi";
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
+
+  useEffect(() => {
+    fetchProducts().then(setProducts);
+  }, []);
 
   const inCart = (id: string) => items.some((i) => i.product.id === id);
 
