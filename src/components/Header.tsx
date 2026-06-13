@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon, LogOut, User } from "lucide-react";
+import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon, LogOut, User, Shield } from "lucide-react";
 import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
 import { useTheme } from "@/lib/theme";
 import { useProfile } from "@/lib/profile";
+import { useAuth } from "@/lib/auth";
 
 const Header = () => {
   const { lang, setLang, tr } = useLang();
   const { count, open } = useCart();
   const { theme, toggle } = useTheme();
   const { profile, clearProfile } = useProfile();
+  const { isAdmin } = useAuth();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -142,6 +144,16 @@ const Header = () => {
                 <LogOut className="w-3.5 h-3.5" />
               </button>
             </div>
+          )}
+
+          {isAdmin && (
+            <Link
+              to="/admin"
+              title="Admin panel"
+              className="hidden md:inline-flex w-10 h-10 items-center justify-center rounded-full border border-primary/40 bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              <Shield className="w-4 h-4" />
+            </Link>
           )}
 
           <a
