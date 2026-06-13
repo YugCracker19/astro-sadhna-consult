@@ -146,6 +146,16 @@ const Header = () => {
             </div>
           )}
 
+          {isAdmin && (
+            <Link
+              to="/admin"
+              title="Admin panel"
+              className="hidden md:inline-flex w-10 h-10 items-center justify-center rounded-full border border-primary/40 bg-primary/5 text-primary hover:bg-primary hover:text-primary-foreground transition-colors"
+            >
+              <Shield className="w-4 h-4" />
+            </Link>
+          )}
+
           <a
             href={buildWhatsAppLink()}
             target="_blank"
