@@ -64,7 +64,7 @@ const Shop = () => {
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {PRODUCTS.map((p) => {
+            {products.map((p) => {
               const added = inCart(p.id);
               return (
                 <div
