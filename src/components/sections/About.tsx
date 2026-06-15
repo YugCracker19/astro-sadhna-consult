@@ -1,6 +1,5 @@
 import { Sparkles, Users, Award } from "lucide-react";
 import { useLang } from "@/lib/i18n";
-import guruji from "@/assets/guruji.png";
 import CountUp from "@/components/CountUp";
 
 const About = () => {
@@ -18,13 +17,8 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="relative">
             <div className="aspect-[4/5] max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/20 via-accent/15 to-transparent p-1 relative overflow-hidden shadow-[var(--shadow-glow)]">
-              <div className="w-full h-full rounded-3xl bg-card relative overflow-hidden">
-                <img
-                  src={guruji}
-                  alt="Guruji — Astro Sadhna ke pradhan jyotishi"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+              <div className="w-full h-full rounded-3xl bg-card relative overflow-hidden flex items-center justify-center text-9xl">
+                🧘
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-background/95 via-background/70 to-transparent p-5 text-center">
                   <div className="font-display text-xl md:text-2xl font-semibold text-gradient">Guruji</div>
                   <div className="text-[10px] md:text-xs uppercase tracking-[0.3em] text-muted-foreground mt-1">{tr("about.sacred")}</div>

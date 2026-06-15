@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X, ShoppingBag, ShoppingCart, Sun, Moon, LogOut, User, Shield } from "lucide-react";
-import logo from "@/assets/astro-sadhna-logo.png";
 import { buildWhatsAppLink } from "@/lib/whatsapp";
 import { useLang } from "@/lib/i18n";
 import { useCart } from "@/lib/cart";
@@ -60,8 +59,8 @@ const Header = () => {
     >
       <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
         <Link to="/" className="flex items-center gap-2 group">
-          <span className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-[var(--shadow-glow)]">
-            <img src={logo} alt="Astro Sadhna logo" className="w-full h-full object-cover" />
+          <span className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden ring-2 ring-primary/30 shadow-[var(--shadow-glow)] bg-gradient-to-br from-primary to-accent">
+            <span className="text-white text-xl">🕉️</span>
           </span>
           <div className="leading-tight">
             <div className="font-display text-xl md:text-2xl font-bold text-foreground">Astro Sadhna</div>

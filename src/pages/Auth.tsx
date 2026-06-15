@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Sparkles, ArrowLeft, Loader2 } from "lucide-react";
+import { Sparkles, ArrowLeft, Loader2, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/lib/auth";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Auth = () => {
   const { signIn, signUp, user, loading } = useAuth();
@@ -15,10 +16,27 @@ const Auth = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [pendingConfirmation, setPendingConfirmation] = useState(false);
+  const [resending, setResending] = useState(false);
 
   useEffect(() => {
     if (!loading && user) navigate("/admin", { replace: true });
   }, [user, loading, navigate]);
+
+  const handleResendConfirmation = async () => {
+    setResending(true);
+    const { error } = await supabase.auth.resend({
+      type: "signup",
+      email,
+      options: { emailRedirectTo: `${window.location.origin}/admin` },
+    });
+    setResending(false);
+    if (error) {
+      toast({ title: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Confirmation email sent", description: "Check your inbox and click the link." });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,15 +45,28 @@ const Auth = () => {
       return;
     }
     setBusy(true);
+    setPendingConfirmation(false);
     const { error } = mode === "login" ? await signIn(email, password) : await signUp(email, password);
     setBusy(false);
     if (error) {
-      toast({ title: error, variant: "destructive" });
+      if (error.toLowerCase().includes("email not confirmed") || error.toLowerCase().includes("email not verified")) {
+        setPendingConfirmation(true);
+        toast({
+          title: "Email not confirmed yet",
+          description: "Check your inbox for the confirmation link, or resend below.",
+          variant: "destructive"
+        });
+      } else {
+        toast({ title: error, variant: "destructive" });
+      }
       return;
     }
     if (mode === "signup") {
-      toast({ title: "Account created", description: "You can now sign in." });
-      setMode("login");
+      setPendingConfirmation(true);
+      toast({
+        title: "Account created",
+        description: "Please check your email and click the confirmation link before signing in."
+      });
     }
   };
 
@@ -96,15 +127,44 @@ const Auth = () => {
             </Button>
           </form>
 
-          <p className="text-center text-sm text-muted-foreground mt-6">
-            {mode === "login" ? "No account yet?" : "Already have an account?"}{" "}
-            <button
-              onClick={() => setMode(mode === "login" ? "signup" : "login")}
-              className="text-primary font-semibold hover:underline"
-            >
-              {mode === "login" ? "Sign up" : "Sign in"}
-            </button>
-          </p>
+          {pendingConfirmation && (
+            <div className="mt-6 p-4 rounded-xl bg-primary/5 border border-primary/20 text-center">
+              <Mail className="w-8 h-8 text-primary mx-auto mb-2" />
+              <p className="text-sm font-medium mb-1">Confirm your email</p>
+              <p className="text-xs text-muted-foreground mb-3">
+                We sent a confirmation link to <span className="font-medium text-foreground">{email}</span>
+              </p>
+              <Button
+                type="button"
+                variant="outline"
+                size="sm"
+                onClick={handleResendConfirmation}
+                disabled={resending}
+                className="w-full"
+              >
+                {resending && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
+                Resend confirmation email
+              </Button>
+              <button
+                onClick={() => { setPendingConfirmation(false); setMode("login"); }}
+                className="text-xs text-muted-foreground hover:text-primary mt-3 block mx-auto"
+              >
+                Already confirmed? Sign in
+              </button>
+            </div>
+          )}
+
+          {!pendingConfirmation && (
+            <p className="text-center text-sm text-muted-foreground mt-6">
+              {mode === "login" ? "No account yet?" : "Already have an account?"}{" "}
+              <button
+                onClick={() => setMode(mode === "login" ? "signup" : "login")}
+                className="text-primary font-semibold hover:underline"
+              >
+                {mode === "login" ? "Sign up" : "Sign in"}
+              </button>
+            </p>
+          )}
         </div>
       </div>
     </main>
